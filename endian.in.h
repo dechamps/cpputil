@@ -2,6 +2,7 @@
 
 #cmakedefine01 DECHAMPS_CPPUTIL_BIG_ENDIAN
 
+#include <cstdlib>
 #include <type_traits>
 
 namespace dechamps_cpputil {
@@ -14,4 +15,13 @@ namespace dechamps_cpputil {
 #elif DECHAMPS_CPPUTIL_BIG_ENDIAN == 1
 	constexpr Endianness endianness = Endianness::BIG;
 #endif
+
+	inline Endianness OppositeEndianness(Endianness originalEndianness) {
+		switch (originalEndianness) {
+		case Endianness::LITTLE: return Endianness::BIG;
+		case Endianness::BIG: return Endianness::LITTLE;
+		}
+		abort();
+	}
+
 }
