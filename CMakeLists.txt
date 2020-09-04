@@ -10,12 +10,15 @@ target_include_directories(endian
 	INTERFACE "$<INSTALL_INTERFACE:include>"
 )
 
+add_library(exception STATIC exception.cpp)
+target_include_directories(exception INTERFACE "$<INSTALL_INTERFACE:include>")
+
 add_library(find INTERFACE)
 target_include_directories(find INTERFACE "$<INSTALL_INTERFACE:include>")
 
 add_library(string INTERFACE)
 target_include_directories(string INTERFACE "$<INSTALL_INTERFACE:include>")
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/endian.h" find.h string.h DESTINATION include/dechamps_cpputil)
-install(TARGETS endian find string EXPORT dechamps_cpputil-config)
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/endian.h" exception.h find.h string.h DESTINATION include/dechamps_cpputil)
+install(TARGETS endian exception find string EXPORT dechamps_cpputil-config)
 install(EXPORT dechamps_cpputil-config NAMESPACE dechamps_cpputil:: DESTINATION lib/cmake/dechamps_cpputil)
